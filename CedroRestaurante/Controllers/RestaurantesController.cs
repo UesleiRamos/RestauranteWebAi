@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CedroRestaurante.Dominio.Entities;
+﻿using CedroRestaurante.Dominio.Entities;
 using CedroRestaurante.Infra.Contexto;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CedroRestaurante.Controllers
 {
@@ -20,7 +15,8 @@ namespace CedroRestaurante.Controllers
         {
             _context = context;
 
-            if (_context.Restaurantes.Count() == 0) {
+            if (_context.Restaurantes.Count() == 0)
+            {
                 _context.Restaurantes.Add(new Restaurante { Descricao = "Restaurante_1" });
                 _context.SaveChanges();
             }
@@ -33,11 +29,12 @@ namespace CedroRestaurante.Controllers
             return Json(restaurantes);
         }
 
-        [HttpGet("{id}", Name ="GetRestaurante")]
+        [HttpGet("{id}", Name = "GetRestaurante")]
         public ActionResult Get(int id)
         {
             var restaurante = _context.Restaurantes.Find(id);
-            if (restaurante == null) {
+            if (restaurante == null)
+            {
                 return NotFound();
 
             }
